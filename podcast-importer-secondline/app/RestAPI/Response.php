@@ -50,29 +50,22 @@ class Response {
 
       $title = $importer->get_feed_title();
 
-      if( 0 === post_exists($title , "", "", PODCAST_IMPORTER_SECONDLINE_POST_TYPE_IMPORT ) ) {
-        $import_post = [
-          'post_title'   => $title,
-          'post_type'    => PODCAST_IMPORTER_SECONDLINE_POST_TYPE_IMPORT,
-          'post_status'  => 'publish',
-        ];
-        $post_import_id = wp_insert_post( $import_post );
+      $import_post = [
+        'post_title'   => $title,
+        'post_type'    => PODCAST_IMPORTER_SECONDLINE_POST_TYPE_IMPORT,
+        'post_status'  => 'publish',
+      ];
+      $post_import_id = wp_insert_post( $import_post );
 
-        foreach( $meta_map as $k => $v )
-          update_post_meta( $post_import_id, $k, $v );
+      foreach( $meta_map as $k => $v )
+        update_post_meta( $post_import_id, $k, $v );
 
-        PIS_Helper_Scheduler::schedule_post_id( intval( $post_import_id ) );
+      PIS_Helper_Scheduler::schedule_post_id( intval( $post_import_id ) );
 
-        $messages[] = [
-          'type'    => 'success',
-          'message' => __( 'Saved podcast feed for continuous import.', 'podcast-importer-secondline' )
-        ];
-      } else {
-        $messages[] = [
-          'type'    => 'danger',
-          'message' => __('This podcast is already scheduled for import. Delete the previous schedule to create a new one.', 'podcast-importer-secondline' )
-        ];
-      }
+      $messages[] = [
+        'type'    => 'success',
+        'message' => __( 'Saved podcast feed for continuous import.', 'podcast-importer-secondline' )
+      ];
     }
 
     return rest_ensure_response( [

@@ -3,7 +3,7 @@ Contributors: secondlinethemes
 Donate link: https://secondlinethemes.com/
 Tags: podcast, import, feed, rss, episodes
 Requires at least: 4.8
-Tested up to: 6.6
+Tested up to: 6.8
 Requires PHP: 7.1
 Stable tag: trunk
 License: GPLv3 or later
@@ -67,6 +67,11 @@ First of all, make sure you are filling in a valid URL, of a valid podcast RSS f
 2. Add multiple continuous import processes of separate podcasts.
 
 == Changelog ==
+
+= 1.5.2 =
+* Fix: Support multiple feeds that share the same title.
+* Updated: Action Scheduler version.
+* Updated: Compatibility with WordPress 6.8.
 
 = 1.5.1 =
 * Updated: Action Scheduler version.
