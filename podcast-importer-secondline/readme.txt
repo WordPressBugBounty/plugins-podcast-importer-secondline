@@ -68,6 +68,10 @@ First of all, make sure you are filling in a valid URL, of a valid podcast RSS f
 
 == Changelog ==
 
+= 1.5.3 =
+* Fix: Resolved issue with podtrac audio URLs being truncated during import.
+* Fix: Captivate embed player import.
+
 = 1.5.2 =
 * Fix: Support multiple feeds that share the same title.
 * Updated: Action Scheduler version.

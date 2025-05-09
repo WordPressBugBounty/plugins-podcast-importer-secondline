@@ -61,9 +61,16 @@ class Embed {
 
     } elseif (strpos($plugin_feed_url, 'captivate.fm') !== false) {
       
-      $captivate_audio_link = explode('media/', $audio_url);
-      $captivate_audio_id = explode('/', $captivate_audio_link[1]);
-      $fixed_share_url = 'https://player.captivate.fm/episode/' . $captivate_audio_id[0];
+      if (strpos($audio_url, 'media/') !== false) {
+        $captivate_audio_link = explode('media/', $audio_url);
+        $captivate_audio_id = explode('/', $captivate_audio_link[1]);
+        $episode_id = $captivate_audio_id[0];
+      } elseif (strpos($audio_url, 'episode/') !== false) {
+        $captivate_audio_link = explode('episode/', $audio_url);
+        $episode_id = str_replace('.mp3', '', $captivate_audio_link[1]);
+      }
+      
+      $fixed_share_url = 'https://player.captivate.fm/episode/' . $episode_id;
       $response = '<iframe src="' . esc_url($fixed_share_url) . '" width="100%" height="170" scrolling="no"  frameborder="0" style="width: 100%; height: 170px"></iframe>';
 
     } elseif (strpos($audio_url, 'buzzsprout.com') !== false) {

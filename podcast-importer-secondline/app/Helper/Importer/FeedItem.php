@@ -101,8 +101,10 @@ class FeedItem {
         $this->audio_url = str_replace( 'dts.podtrac.com/redirect.mp3/', '', $this->audio_url );
     }
 
-    $this->audio_url = preg_replace( '/(?s:.*)(https?:\/\/(?:[\w\-\.]+[^#?\s]+)(?:\.mp3))(?s:.*)/', '$1', $this->audio_url );
-    $this->audio_url = preg_replace( '/(?s:.*)(https?:\/\/(?:[\w\-\.]+[^#?\s]+)(?:\.m4a))(?s:.*)/', '$1', $this->audio_url );
+    if (strpos($this->audio_url, 'dts.podtrac.com/redirect.mp3/') === false) {
+      $this->audio_url = preg_replace('/(?s:.*)(https?:\/\/(?:[\w\-\.]+[^#?\s]+)(?:\.mp3))(?s:.*)/', '$1', $this->audio_url);
+      $this->audio_url = preg_replace('/(?s:.*)(https?:\/\/(?:[\w\-\.]+[^#?\s]+)(?:\.m4a))(?s:.*)/', '$1', $this->audio_url);
+    }
 
     $this->audio_feed_url = (string) $this->importer->feed_link;
     $this->item_link_url = (string) $this->feed_item->link;
