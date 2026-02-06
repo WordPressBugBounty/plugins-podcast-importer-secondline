@@ -3,7 +3,7 @@ Contributors: secondlinethemes
 Donate link: https://secondlinethemes.com/
 Tags: podcast, import, feed, rss, episodes
 Requires at least: 4.8
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.1
 Stable tag: trunk
 License: GPLv3 or later
@@ -21,7 +21,7 @@ The plugin supports importing episodes into existing custom post types, assign c
 To use the plugin, simply run a new import under "Tools -> Podcast Importer SecondLine" via the main menu that appears in your WordPress dashboard. Set the different options and if you need a continuous import process for future episodes, make sure to hit that checkbox before running the import process. 
 You can disable a schedueld import at any time by simply deleting the import entry. 
 
-The plugin also supports automatic import of native / embed audio players from 15+ podcast hosting providers, including: Buzzsprout, Megaphone, Pinecast, Captivate, Transistor, [Anchor.fm](https://anchor.fm), Simplecast, Podbean, Whooshkaa, Omny, Ausha, Spreaker, [Podcastpage.io](https://podcastpage.io) Audioboom, Fireside, Libsyn and more.
+The plugin also supports automatic import of native / embed audio players from 15+ podcast hosting providers, including: Buzzsprout, Megaphone, Pinecast, Captivate, Transistor, Spotify for Creators, Simplecast, Podbean, Whooshkaa, Omny, Ausha, Spreaker, [Beamly](https://beamly.com), Audioboom, Fireside, Libsyn and more.
 
 == Pro Version ==
 The Pro version can be found here - [https://secondlinethemes.com/podcast-importer-pro](https://secondlinethemes.com/podcast-importer-pro)
@@ -67,6 +67,13 @@ First of all, make sure you are filling in a valid URL, of a valid podcast RSS f
 2. Add multiple continuous import processes of separate podcasts.
 
 == Changelog ==
+
+= 1.5.5 =
+* Improved: Episode image imports now retry up to 3 times before stopping, preventing infinite loops on broken image URLs.
+* Improved: Prevented duplicate tasks from being queued during feed syncs.
+
+= 1.5.4 =
+* Updated: Action Scheduler version.
 
 = 1.5.3 =
 * Fix: Resolved issue with podtrac audio URLs being truncated during import.

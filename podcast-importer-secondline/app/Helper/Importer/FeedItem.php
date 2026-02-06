@@ -36,6 +36,7 @@ class FeedItem {
   ];
 
   public $audio_url;
+  public $item_link_url = '';
   public $audio_feed_url  = '';
   public $audio_feed_host = '';
   public $audio_embed_html = ''; // Can be shortcode only.
@@ -54,7 +55,13 @@ class FeedItem {
     // Create the post
     global $wpdb;
 
-    $this->current_post_id = intval($wpdb->get_var('SELECT post_id FROM ' . $wpdb->postmeta . ' WHERE ( meta_key = "secondline_imported_guid" AND meta_value LIKE "%' . esc_sql($wpdb->esc_like( $this->_guid )) . '%")' ) );
+    $this->current_post_id = intval($wpdb->get_var(
+      $wpdb->prepare(
+        'SELECT post_id FROM ' . $wpdb->postmeta . ' WHERE meta_key = %s AND meta_value = %s LIMIT 1',
+        'secondline_imported_guid',
+        $this->_guid
+      )
+    ));
 
     $this->episode_number = podcast_importer_secondline_sanitize_feed_value($this->feed_item_itunes->episode );
     $this->season_number  = podcast_importer_secondline_sanitize_feed_value( $this->feed_item_itunes->season );
@@ -243,6 +250,21 @@ class FeedItem {
     }
 
     if( $image_url === false )
+      return;
+
+    // Skip if post already has a featured image
+    if( has_post_thumbnail( $this->current_post_id ) )
+      return;
+
+    // Skip if image import has permanently failed for this post (max retries exceeded)
+    if( get_post_meta( $this->current_post_id, '_secondline_image_import_failed', true ) )
+      return;
+
+    // Prevent duplicate queue entries for the same post/image combination
+    if( \PodcastImporterSecondLine\Helper\Scheduler::is_action_scheduled(
+      PODCAST_IMPORTER_SECONDLINE_ALIAS . '_scheduler_image_sync',
+      [ $this->current_post_id, $image_url ]
+    ) )
       return;
 
     as_enqueue_async_action( PODCAST_IMPORTER_SECONDLINE_ALIAS . '_scheduler_image_sync', [ $this->current_post_id, $image_url ], PODCAST_IMPORTER_SECONDLINE_ALIAS );

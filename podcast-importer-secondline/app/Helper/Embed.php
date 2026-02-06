@@ -33,7 +33,7 @@ class Embed {
       $response = '<iframe src="https://player.simplecast.com/' . $fixed_share_url[2] . '" height="200px" width="100%" frameborder="no" scrolling="no" style="width:100%; height:200px;"></iframe>';
 
 
-    } elseif (strpos($feed_host_url, 'podcastpage.io') !== false) {
+    } elseif (strpos($feed_host_url, 'beamly.com') !== false) {
 
       $fixed_share_url = str_replace('/episode/', '/?pp_mode=preview/', $embed_url);
       $response = '<iframe src="' . esc_url($fixed_share_url) . '" height="200px" width="100%" frameborder="0" scrolling="no" style="width:100%; height:200px;"></iframe>';
