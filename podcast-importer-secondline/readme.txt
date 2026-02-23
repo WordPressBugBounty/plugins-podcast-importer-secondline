@@ -68,6 +68,9 @@ First of all, make sure you are filling in a valid URL, of a valid podcast RSS f
 
 == Changelog ==
 
+= 1.5.6 =
+* Fixed: Simplecast embed imports.
+
 = 1.5.5 =
 * Improved: Episode image imports now retry up to 3 times before stopping, preventing infinite loops on broken image URLs.
 * Improved: Prevented duplicate tasks from being queued during feed syncs.

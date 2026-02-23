@@ -28,9 +28,10 @@ class Embed {
       $response = '<iframe src="' . esc_url($fixed_share_url) . '" height="180px" width="100%" frameborder="0" scrolling="no" style="width:100%; height:180px;"></iframe>';
 
     } elseif (strpos($plugin_feed_url, 'simplecast.com') !== false) {
-      $extract_sc_url = explode('/audio/', $audio_url);
-      $fixed_share_url = explode('/', $extract_sc_url[1]);
-      $response = '<iframe src="https://player.simplecast.com/' . $fixed_share_url[2] . '" height="200px" width="100%" frameborder="no" scrolling="no" style="width:100%; height:200px;"></iframe>';
+      $episode_id = strpos($audio_url, '/episodes/') !== false
+      ? explode('/', explode('/episodes/', $audio_url)[1])[0]
+      : explode('/', explode('/audio/', $audio_url)[1])[2];
+      $response = '<iframe src="https://player.simplecast.com/' . $episode_id . '" height="200px" width="100%" frameborder="no" scrolling="no" style="width:100%; height:200px;"></iframe>';
 
 
     } elseif (strpos($feed_host_url, 'beamly.com') !== false) {

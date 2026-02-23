@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Podcast Importer SecondLine
  * Description:       A simple podcast import plugin with ongoing podcast feed import features.
- * Version:           1.5.5
+ * Version:           1.5.6
  * Author:            SecondLineThemes
  * Author URI:        https://secondlinethemes.com/
  * License:           GPL-2.0+
@@ -14,7 +14,7 @@
 if ( ! defined( 'WPINC' ) )
 	die;
 
-define( 'PODCAST_IMPORTER_SECONDLINE_VERSION', '1.5.5' );
+define( 'PODCAST_IMPORTER_SECONDLINE_VERSION', '1.5.6' );
 define( "PODCAST_IMPORTER_SECONDLINE_BASE_FILE_PATH", __FILE__ );
 define( "PODCAST_IMPORTER_SECONDLINE_BASE_PATH", dirname( PODCAST_IMPORTER_SECONDLINE_BASE_FILE_PATH ) );
 define( "PODCAST_IMPORTER_SECONDLINE_PLUGIN_IDENTIFIER", ltrim( str_ireplace( dirname( PODCAST_IMPORTER_SECONDLINE_BASE_PATH ), '', PODCAST_IMPORTER_SECONDLINE_BASE_FILE_PATH ), '/' ) );
